@@ -29,6 +29,7 @@ bot.on('message', (payload, reply) => {
 })
 
 let app = express()
+app.set('port', process.env.PORT || 8080);
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -44,4 +45,6 @@ app.post('/', (req, res) => {
   res.end(JSON.stringify({ status: 'ok' }))
 })
 
-http.createServer(app).listen(3000)
+app.listen(app.get('port'), () => {
+  console.log('Node app is running on port', app.get('port'));
+});
