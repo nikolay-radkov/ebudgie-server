@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const Bot = require('messenger-bot')
 
 let bot = new Bot({
-  token: 'PAGE_TOKEN',
+  token: process.env.PAGE_TOKEN,
   verify: 'VERIFY_TOKEN',
   app_secret: 'APP_SECRET'
 })
