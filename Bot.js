@@ -22,7 +22,7 @@ class Bot extends EventEmitter {
   getProfile(id, cb) {
     return request({
       method: 'GET',
-      uri: `https://graph.facebook.com/v2.6/${id}`,
+      uri: `https://graph.facebook.com/v2.8/${id}`,
       qs: this._getQs({ fields: 'first_name,last_name,profile_pic,locale,timezone,gender' }),
       json: true
     })
@@ -40,7 +40,7 @@ class Bot extends EventEmitter {
   sendMessage(recipient, payload, cb) {
     return request({
       method: 'POST',
-      uri: 'https://graph.facebook.com/v2.6/me/messages',
+      uri: 'https://graph.facebook.com/v2.8/me/messages',
       qs: this._getQs(),
       json: {
         recipient: { id: recipient },
@@ -61,7 +61,7 @@ class Bot extends EventEmitter {
   sendSenderAction(recipient, senderAction, cb) {
     return request({
       method: 'POST',
-      uri: 'https://graph.facebook.com/v2.6/me/messages',
+      uri: 'https://graph.facebook.com/v2.8/me/messages',
       qs: this._getQs(),
       json: {
         recipient: {
@@ -84,7 +84,7 @@ class Bot extends EventEmitter {
   setThreadSettings(payload, cb) {
     return request({
       method: 'POST',
-      uri: 'https://graph.facebook.com/v2.6/me/thread_settings',
+      uri: 'https://graph.facebook.com/v2.8/me/messenger_profile',
       qs: this._getQs(),
       json: payload
     })
@@ -95,14 +95,14 @@ class Bot extends EventEmitter {
       })
       .catch(err => {
         if (!cb) return Promise.reject(err)
-        cb(err)
+        cb(err.error)
       })
   }
 
   removeThreadSettings(threadState, cb) {
     return request({
       method: 'DELETE',
-      uri: 'https://graph.facebook.com/v2.6/me/thread_settings',
+      uri: 'https://graph.facebook.com/v2.8/me/thread_settings',
       qs: this._getQs(),
       json: {
         setting_type: 'call_to_actions',
@@ -122,20 +122,22 @@ class Bot extends EventEmitter {
 
   setGreetingText(greetingText, cb) {
     const greetingData = {
-      setting_type: 'greeting',
-      greeting: {
-        text: greetingText
-      }
-    }
+      greeting: [
+        {
+          "locale": "default",
+          "text": greetingText
+        }
+      ]
+    };
 
     return this.setThreadSettings(greetingData, cb)
   }
 
   setGetStartedButton(callToActionData, cb) {
     const getStartedData = {
-      setting_type: 'call_to_actions',
-      thread_state: 'new_thread',
-      call_to_actions: callToActionData
+      get_started: {
+        payload: JSON.stringify(callToActionData)
+      }
     };
 
     return this.setThreadSettings(getStartedData, cb)
@@ -143,9 +145,13 @@ class Bot extends EventEmitter {
 
   setPersistentMenu(callToActionData, cb) {
     const persistantMenuData = {
-      setting_type: 'call_to_actions',
-      thread_state: 'existing_thread',
-      call_to_actions: callToActionData
+      "persistent_menu": [
+        {
+          "locale": "default",
+          "composer_input_disabled": true,
+          "call_to_actions": callToActionData
+        }
+      ]
     };
 
     return this.setThreadSettings(persistantMenuData, cb)
