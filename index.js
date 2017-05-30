@@ -84,7 +84,7 @@ bot.on('message', (payload, reply) => {
 })
 
 bot.on('postback', (payload, reply) => {
-  let text = payload.message.text
+  let text = payload.postback.payload
 
   bot.getProfile(payload.sender.id, (err, profile) => {
     if (err) throw err
@@ -106,7 +106,7 @@ bot.on('postback', (payload, reply) => {
     }, (err) => {
       if (err) throw err
 
-      console.log(`Echoed back to ${profile.first_name} ${profile.last_name}: ${text}`)
+      console.log(`Postback to ${profile.first_name} ${profile.last_name}: ${text}`)
     })
   })
 })
