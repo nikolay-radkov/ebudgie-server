@@ -1,21 +1,20 @@
-'use strict'
-const url = require('url')
-const qs = require('querystring')
-const EventEmitter = require('events').EventEmitter
-const request = require('request-promise')
-const crypto = require('crypto')
+import url from 'url';
+import qs from 'querystring';
+import { EventEmitter } from 'events';
+import request from 'request-promise';
+import crypto from 'crypto';
 
 class Bot extends EventEmitter {
   constructor(opts) {
-    super()
+    super();
 
-    opts = opts || {}
+    opts = opts || {};
     if (!opts.token) {
-      throw new Error('Missing page token. See FB documentation for details: https://developers.facebook.com/docs/messenger-platform/quickstart')
+      throw new Error('Missing page token. See FB documentation for details: https://developers.facebook.com/docs/messenger-platform/quickstart');
     }
-    this.token = opts.token
-    this.app_secret = opts.app_secret || false
-    this.verify_token = opts.verify || false
+    this.token = opts.token;
+    this.app_secret = opts.app_secret || false;
+    this.verify_token = opts.verify || false;
   }
 
   async getProfile(id) {
@@ -78,8 +77,8 @@ class Bot extends EventEmitter {
     const greetingData = {
       greeting: [
         {
-          "locale": "default",
-          "text": greetingText
+          locale: 'default',
+          text: greetingText
         }
       ]
     };
@@ -99,11 +98,11 @@ class Bot extends EventEmitter {
 
   async setPersistentMenu(callToActionData) {
     const persistantMenuData = {
-      "persistent_menu": [
+      persistent_menu: [
         {
-          "locale": "default",
-          "composer_input_disabled": true,
-          "call_to_actions": callToActionData
+          locale: 'default',
+          composer_input_disabled: true,
+          call_to_actions: callToActionData
         }
       ]
     };
@@ -120,103 +119,109 @@ class Bot extends EventEmitter {
   }
 
   async removePersistentMenu() {
-    return await this.removeThreadSettings('existing_thread')
+    return await this.removeThreadSettings('existing_thread');
   }
 
   middleware() {
     return (req, res) => {
       // we always write 200, otherwise facebook will keep retrying the request
-      res.writeHead(200, { 'Content-Type': 'application/json' })
-      if (req.url === '/_status') return res.end(JSON.stringify({ status: 'ok' }))
-      if (this.verify_token && req.method === 'GET') return this._verify(req, res)
-      if (req.method !== 'POST') return res.end()
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      if (req.url === '/_status') {
+        return res.end(JSON.stringify({ status: 'ok' }));
+      }
+      if (this.verify_token && req.method === 'GET') {
+        return this._verify(req, res);
+      }
+      if (req.method !== 'POST') {
+        return res.end();
+      }
 
-      let body = ''
+      let body = '';
 
       req.on('data', (chunk) => {
-        body += chunk
-      })
+        body += chunk;
+      });
 
       req.on('end', () => {
         // check message integrity
         if (this.app_secret) {
-          let hmac = crypto.createHmac('sha1', this.app_secret)
-          hmac.update(body)
+          let hmac = crypto.createHmac('sha1', this.app_secret);
+          hmac.update(body);
 
           if (req.headers['x-hub-signature'] !== `sha1=${hmac.digest('hex')}`) {
-            this.emit('error', new Error('Message integrity check failed'))
-            return res.end(JSON.stringify({ status: 'not ok', error: 'Message integrity check failed' }))
+            this.emit('error', new Error('Message integrity check failed'));
+            return res.end(JSON.stringify({ status: 'not ok', error: 'Message integrity check failed' }));
           }
         }
 
-        let parsed = JSON.parse(body)
-        this._handleMessage(parsed)
+        let parsed = JSON.parse(body);
+        this._handleMessage(parsed);
 
-        res.end(JSON.stringify({ status: 'ok' }))
-      })
-    }
+        res.end(JSON.stringify({ status: 'ok' }));
+      });
+    };
   }
 
-  _getQs(qs) {
-    if (typeof qs === 'undefined') {
-      qs = {}
+  _getQs(querystring) {
+    if (typeof querystring === 'undefined') {
+      querystring = {};
     }
-    qs['access_token'] = this.token
+    querystring.access_token = this.token;
 
-    return qs
+    return querystring;
   }
 
   _handleMessage(json) {
-    let entries = json.entry
+    let entries = json.entry;
 
     entries.forEach((entry) => {
-      let events = entry.messaging
+      let events = entry.messaging;
 
       events.forEach((event) => {
         // handle inbound messages and echos
         if (event.message) {
           if (event.message.is_echo) {
-            this._handleEvent('echo', event)
+            this._handleEvent('echo', event);
           } else {
-            this._handleEvent('message', event)
+            this._handleEvent('message', event);
           }
         }
 
         // handle postbacks
         if (event.postback) {
-          this._handleEvent('postback', event)
+          this._handleEvent('postback', event);
         }
 
         // handle message delivered
         if (event.delivery) {
-          this._handleEvent('delivery', event)
+          this._handleEvent('delivery', event);
         }
 
         // handle message read
         if (event.read) {
-          this._handleEvent('read', event)
+          this._handleEvent('read', event);
         }
 
         // handle authentication
         if (event.optin) {
-          this._handleEvent('authentication', event)
+          this._handleEvent('authentication', event);
         }
 
         // handle referrals (e.g. m.me links)
         if (event.referral) {
-          this._handleEvent('referral', event)
+          this._handleEvent('referral', event);
         }
 
         // handle account_linking
         if (event.account_linking && event.account_linking.status) {
           if (event.account_linking.status === 'linked') {
-            this._handleEvent('accountLinked', event)
+            this._handleEvent('accountLinked', event);
           } else if (event.account_linking.status === 'unlinked') {
-            this._handleEvent('accountUnlinked', event)
+            this._handleEvent('accountUnlinked', event);
           }
         }
-      })
-    })
+      });
+    });
   }
 
   _getActionsObject(event) {
@@ -226,22 +231,22 @@ class Bot extends EventEmitter {
         await this.sendSenderAction(event.sender.id, senderTypingAction);
       },
       markRead: this.sendSenderAction.bind(this, event.sender.id, 'mark_seen')
-    }
+    };
   }
 
   _verify(req, res) {
-    let query = qs.parse(url.parse(req.url).query)
+    let query = qs.parse(url.parse(req.url).query);
 
     if (query['hub.verify_token'] === this.verify_token) {
-      return res.end(query['hub.challenge'])
+      return res.end(query['hub.challenge']);
     }
 
-    return res.end('Error, wrong validation token')
+    return res.end('Error, wrong validation token');
   }
 
   _handleEvent(type, event) {
-    this.emit(type, event, this.sendMessage.bind(this, event.sender.id), this._getActionsObject(event))
+    this.emit(type, event, this.sendMessage.bind(this, event.sender.id), this._getActionsObject(event));
   }
 }
 
-module.exports = Bot
+export default Bot;
