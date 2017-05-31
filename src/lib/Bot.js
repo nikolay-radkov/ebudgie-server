@@ -16,29 +16,19 @@ class Bot extends EventEmitter {
     this.token = opts.token
     this.app_secret = opts.app_secret || false
     this.verify_token = opts.verify || false
-    this.debug = opts.debug || false
   }
 
-  getProfile(id, cb) {
-    return request({
+  async getProfile(id) {
+    return await request({
       method: 'GET',
       uri: `https://graph.facebook.com/v2.8/${id}`,
       qs: this._getQs({ fields: 'first_name,last_name,profile_pic,locale,timezone,gender' }),
       json: true
-    })
-      .then(body => {
-        if (body.error) return Promise.reject(body.error)
-        if (!cb) return body
-        cb(null, body)
-      })
-      .catch(err => {
-        if (!cb) return Promise.reject(err)
-        cb(err)
-      })
+    });
   }
 
-  sendMessage(recipient, payload, cb) {
-    return request({
+  async sendMessage(recipient, payload) {
+    return await request({
       method: 'POST',
       uri: 'https://graph.facebook.com/v2.8/me/messages',
       qs: this._getQs(),
@@ -46,20 +36,11 @@ class Bot extends EventEmitter {
         recipient: { id: recipient },
         message: payload
       }
-    })
-      .then(body => {
-        if (body.error) return Promise.reject(body.error)
-        if (!cb) return body
-        cb(null, body)
-      })
-      .catch(err => {
-        if (!cb) return Promise.reject(err)
-        cb(err)
-      })
+    });
   }
 
-  sendSenderAction(recipient, senderAction, cb) {
-    return request({
+  async sendSenderAction(recipient, senderAction) {
+    return await request({
       method: 'POST',
       uri: 'https://graph.facebook.com/v2.8/me/messages',
       qs: this._getQs(),
@@ -69,38 +50,20 @@ class Bot extends EventEmitter {
         },
         sender_action: senderAction
       }
-    })
-      .then(body => {
-        if (body.error) return Promise.reject(body.error)
-        if (!cb) return body
-        cb(null, body)
-      })
-      .catch(err => {
-        if (!cb) return Promise.reject(err)
-        cb(err)
-      })
+    });
   }
 
-  setThreadSettings(payload, cb) {
-    return request({
+  async setThreadSettings(payload) {
+    return await request({
       method: 'POST',
       uri: 'https://graph.facebook.com/v2.8/me/messenger_profile',
       qs: this._getQs(),
       json: payload
-    })
-      .then(body => {
-        if (body.error) return Promise.reject(body.error)
-        if (!cb) return body
-        cb(null, body)
-      })
-      .catch(err => {
-        if (!cb) return Promise.reject(err)
-        cb(err.error)
-      })
+    });
   }
 
-  removeThreadSettings(threadState, cb) {
-    return request({
+  async removeThreadSettings(threadState) {
+    return await request({
       method: 'DELETE',
       uri: 'https://graph.facebook.com/v2.8/me/thread_settings',
       qs: this._getQs(),
@@ -108,19 +71,10 @@ class Bot extends EventEmitter {
         setting_type: 'call_to_actions',
         thread_state: threadState
       }
-    })
-      .then(body => {
-        if (body.error) return Promise.reject(body.error)
-        if (!cb) return body
-        cb(null, body)
-      })
-      .catch(err => {
-        if (!cb) return Promise.reject(err)
-        cb(err)
-      })
+    });
   }
 
-  setGreetingText(greetingText, cb) {
+  async setGreetingText(greetingText) {
     const greetingData = {
       greeting: [
         {
@@ -130,20 +84,20 @@ class Bot extends EventEmitter {
       ]
     };
 
-    return this.setThreadSettings(greetingData, cb)
+    return await this.setThreadSettings(greetingData);
   }
 
-  setGetStartedButton(callToActionData, cb) {
+  async setGetStartedButton(callToActionData) {
     const getStartedData = {
       get_started: {
         payload: JSON.stringify(callToActionData)
       }
     };
 
-    return this.setThreadSettings(getStartedData, cb)
+    return await this.setThreadSettings(getStartedData);
   }
 
-  setPersistentMenu(callToActionData, cb) {
+  async setPersistentMenu(callToActionData) {
     const persistantMenuData = {
       "persistent_menu": [
         {
@@ -154,19 +108,19 @@ class Bot extends EventEmitter {
       ]
     };
 
-    return this.setThreadSettings(persistantMenuData, cb)
+    return await this.setThreadSettings(persistantMenuData);
   }
 
-  removeGetStartedButton(cb) {
-    return this.removeThreadSettings('new_thread', cb)
+  async removeGetStartedButton() {
+    return await this.removeThreadSettings('new_thread');
   }
 
-  removeGreetingText(cb) {
-    return this.removeThreadSettings('greeting', cb)
+  async removeGreetingText() {
+    return await this.removeThreadSettings('greeting');
   }
 
-  removePersistentMenu(cb) {
-    return this.removeThreadSettings('existing_thread', cb)
+  async removePersistentMenu() {
+    return await this.removeThreadSettings('existing_thread')
   }
 
   middleware() {
@@ -208,10 +162,6 @@ class Bot extends EventEmitter {
       qs = {}
     }
     qs['access_token'] = this.token
-
-    if (this.debug) {
-      qs['debug'] = this.debug
-    }
 
     return qs
   }
@@ -271,9 +221,9 @@ class Bot extends EventEmitter {
 
   _getActionsObject(event) {
     return {
-      setTyping: (typingState, cb) => {
-        let senderTypingAction = typingState ? 'typing_on' : 'typing_off'
-        this.sendSenderAction(event.sender.id, senderTypingAction, cb)
+      setTyping: async (typingState) => {
+        let senderTypingAction = typingState ? 'typing_on' : 'typing_off';
+        await this.sendSenderAction(event.sender.id, senderTypingAction);
       },
       markRead: this.sendSenderAction.bind(this, event.sender.id, 'mark_seen')
     }
