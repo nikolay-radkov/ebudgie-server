@@ -1,6 +1,6 @@
 module.exports = {
   client: 'pg',
-  connection: process.env.PG_URI + '?ssl=true',
+  connection: process.env.DATABASE_URL + '?ssl=true',
   pool: {
     min: process.env.PG_POOL_MIN,
     max: process.env.PG_POOL_MAX
