@@ -1,0 +1,15 @@
+{
+  "env": {
+    "node": true
+  },
+  "plugins": [
+    "syntax-object-rest-spread",
+    "add-module-exports",
+    "transform-async-to-generator",
+    "transform-es2015-destructuring",
+    "transform-object-rest-spread"
+  ],
+  "presets": [
+    "node6"
+  ]
+}
