@@ -4,6 +4,11 @@ import bodyParser from 'body-parser';
 import Bot from './lib/Bot';
 import initilizeMessangerProfile from './services/messengerProfile';
 
+import { getDocument } from './lib/couchdb';
+getDocument('3cfc9a96341c0e24')
+  .then(d => console.log(d))
+  .catch(d => console.log(d))
+
 let bot = new Bot({
   token: process.env.PAGE_TOKEN,
   verify: process.env.VERIFY_TOKEN,
