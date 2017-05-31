@@ -15,7 +15,10 @@
     "babel-register": "^6.24.1",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
+    "knex": "^0.13.0",
     "koa": "^2.2.0",
+    "node-couchdb": "^1.1.1",
+    "pg": "^6.2.3",
     "request": "^2.81.0",
     "request-promise": "^4.2.1"
   },
@@ -27,6 +30,10 @@
     "eslint-plugin-import": "^2.3.0"
   },
   "scripts": {
+    "knex": "node_modules/.bin/knex --cwd db --knexfile ./db/knexfile.js",
+    "migrate": "npm run knex -- migrate:latest",
+    "rollback": "npm run knex -- migrate:rollback",
+    "prestart": "npm run migrate",
     "start": "node index.js",
     "lint": "eslint src/**"
   },
