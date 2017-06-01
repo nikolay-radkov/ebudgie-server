@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import Bot from './lib/Bot';
 import initializeMessangerProfile from './services/messengerProfile';
 import apiRoutes from './api';
+import viewsRoutes from './views';
 // import { getDocument } from './lib/couchdb';
 // getDocument('3cfc9a96341c0e24')
 //   .then(d => console.log(d))
@@ -43,10 +44,10 @@ bot.on('postback', async (payload, reply) => {
         type: 'template',
         payload: {
           template_type: 'button',
-          text: 'What do you want to do next?',
+          text: 'EBudgie needs to log you',
           buttons: [{
             type: 'account_link',
-            url: 'https://leon92xx.wixsite.com/ebudgie-website/'
+            url: process.env.LOGIN_URL
           }]
         }
       }
@@ -65,6 +66,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+viewsRoutes(app);
 apiRoutes(app);
 
 app.get('/', (req, res) => {
@@ -73,7 +75,7 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   bot._handleMessage(req.body);
-  res.end(JSON.stringify({ status: 'ok' }));
+  res.json({ status: 'ok' });
 });
 
 app.listen(app.get('port'), () => {
