@@ -18,7 +18,7 @@ const create = async (req, res) => {
       return res.status(400).json({ error: 'Bad credentials' });
     }
 
-    return res.json({ statuss: 'success' });
+    return res.json({ status: 'success' });
   } catch (e) {
     console.log(e);
     return res.status(500).json({ error: 'Error during user creation' });
