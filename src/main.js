@@ -5,6 +5,8 @@ import Bot from './lib/Bot';
 import initializeMessangerProfile from './services/messengerProfile';
 import apiRoutes from './api';
 import viewsRoutes from './views';
+import { updateUser } from './lib/postgres';
+
 // import { getDocument } from './lib/couchdb';
 // getDocument('3cfc9a96341c0e24')
 //   .then(d => console.log(d))
@@ -56,6 +58,15 @@ bot.on('postback', async (payload, reply) => {
   } catch (e) {
     console.log('ERROR in bot.on(\'postback\')', e);
   }
+});
+
+bot.on('accountLinked', async (payload, reply) => {
+  const page_scoped_id = payload.sender.id;
+  const ebudgie_id = payload.account_linking.authorization_code;
+
+  await updateUser(ebudgie_id, page_scoped_id);
+
+  await reply({ text: 'Please choose an option now' });
 });
 
 let app = express();
