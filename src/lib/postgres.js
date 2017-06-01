@@ -4,10 +4,18 @@ import knexfile from '../../db/knexfile';
 
 const db = knexFactory(knexfile);
 
-export const getUser = async (ebudgie_id) => {
+export const getUserByEbudgieId = async (ebudgie_id) => {
   return await db('users')
     .select()
     .where({ ebudgie_id })
+    .first();
+};
+
+export const getUserByCredentials = async ({ link_code, email = null, phone = null }) => {
+  return await db('users')
+    .select()
+    .where({ link_code })
+    .andWhere(db.raw('(email = :email OR phone = :phone)', { email, phone }))
     .first();
 };
 
