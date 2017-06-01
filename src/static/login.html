@@ -62,7 +62,6 @@
           phone: phone,
         },
         success: function (result) {
-          debugger
           if (result.status === 'success') {
             var redirectUri = decodeURIComponent(qs.redirect_uri);
             if (redirectUri.indexOf('?') !== -1) {
@@ -74,7 +73,6 @@
           alert('Wrong credentials');
         },
         error: function (e) {
-          debugger
           alert('Wrong credentials');
         }
       })
