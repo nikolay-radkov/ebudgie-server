@@ -29,9 +29,9 @@ export const insertUser = async (userData) => {
     .returning('*');
 };
 
-export const updateUser = async (ebudgie_id, page_scoped_id) => {
+export const updateUser = async (link_code, page_scoped_id) => {
   return await db('users')
-    .where({ ebudgie_id })
+    .where({ link_code })
     .update({ page_scoped_id })
     .returning('*');
 };

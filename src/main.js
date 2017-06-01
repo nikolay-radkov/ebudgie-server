@@ -62,11 +62,12 @@ bot.on('postback', async (payload, reply) => {
 
 bot.on('accountLinked', async (payload, reply) => {
   const page_scoped_id = payload.sender.id;
-  const ebudgie_id = payload.account_linking.authorization_code;
+  const link_code = payload.account_linking.authorization_code;
 
-  await updateUser(ebudgie_id, page_scoped_id);
+  await updateUser(link_code, page_scoped_id);
 
   await reply({ text: 'Please choose an option now' });
+  console.log(`Linked account ${link_code} -> ${page_scoped_id}`);
 });
 
 let app = express();
