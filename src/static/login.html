@@ -2,6 +2,7 @@
 
 <head>
   <title>EBudgie | Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
@@ -10,27 +11,33 @@
 
 <body>
   <div>
-    <nav class="navbar navbar-inverse navbar-static-top">
+    <nav class="navbar navbar-default navbar-static-top">
       <div class="container">
         <span class="navbar-brand">EBudgie Login</span>
       </div>
     </nav>
-    <div class="jumbotron" style="padding:40px;">
-      <h1>Welcome to EBudgie Login</h1>
-      <p>Please fill the inputs below</p>
-      <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Link Code:</span>
-        <input type="text" id='link' name="link_code" class="form-control" placeholder="EBudgie-27" aria-describedby="basic-addon1">
+    <div class="container">
+      <h1 class="text-center">Welcome to EBudgie</h1>
+      <div class="jumbotron">
+        <p class="text-center">Please fill the inputs below to login. <br/><i>(Link code is required)</i></p>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1"><b>Link Code:</b></span>
+          <input type="text" id='link' name="link_code" class="form-control" placeholder="EBudgie-27" aria-describedby="basic-addon1">
+        </div>
+        <hr />
+        <p class="text-center">Login Credentials. <br/><i>(Only one from below is required)</i></p>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">Email:</span>
+          <input type="text" id='email' name="email" class="form-control" placeholder="jack@leon.com" aria-describedby="basic-addon1">
+        </div>
+        <p class="text-center">Or</p>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">Phone number:</span>
+          <input type="text" id='phone' name="phone" class="form-control" placeholder="+359123123123" aria-describedby="basic-addon1">
+        </div>
+        <hr />
+        <p class="text-center"><button id="submit" class="btn btn-success btn-lg" role="button">Login</button></p>
       </div>
-      <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Email:</span>
-        <input type="text" id='email' name="email" class="form-control" placeholder="jack@leon.com" aria-describedby="basic-addon1">
-      </div>
-      <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Phone number:</span>
-        <input type="text" id='phone' name="phone" class="form-control" placeholder="+359123123123" aria-describedby="basic-addon1">
-      </div>
-      <p><button id="submit" class="btn btn-primary btn-lg" role="button">Login</button></p>
     </div>
   </div>
   <script>
