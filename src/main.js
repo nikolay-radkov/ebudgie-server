@@ -2,12 +2,12 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 import Bot from './lib/Bot';
-import initilizeMessangerProfile from './services/messengerProfile';
-
-import { getDocument } from './lib/couchdb';
-getDocument('3cfc9a96341c0e24')
-  .then(d => console.log(d))
-  .catch(d => console.log(d))
+import initializeMessangerProfile from './services/messengerProfile';
+import apiRoutes from './api';
+// import { getDocument } from './lib/couchdb';
+// getDocument('3cfc9a96341c0e24')
+//   .then(d => console.log(d))
+//   .catch(d => console.log(d))
 
 let bot = new Bot({
   token: process.env.PAGE_TOKEN,
@@ -15,7 +15,7 @@ let bot = new Bot({
   app_secret: process.env.APP_SECRET
 });
 
-initilizeMessangerProfile(bot);
+initializeMessangerProfile(bot);
 
 bot.on('error', (err) => {
   console.log(err.message);
@@ -64,6 +64,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+apiRoutes(app);
 
 app.get('/', (req, res) => {
   return bot._verify(req, res);
