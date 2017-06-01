@@ -14,3 +14,5 @@ export const getDocument = async (docId) => {
   const document = await db.get(process.env.COUCHDB_DATABASE, docId);
   return document.data;
 };
+
+export default db;
