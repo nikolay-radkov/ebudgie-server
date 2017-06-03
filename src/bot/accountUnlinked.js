@@ -5,7 +5,7 @@ export default (bot) => {
     const page_scoped_id = payload.sender.id;
 
     await unlinkUser(page_scoped_id);
-    await reply({ text: 'You have successfully logged out' });
+    await reply({ text: 'You have successfully logged out from EBudgie' });
     console.log(`Unlinked account -> ${page_scoped_id}`);
   };
 };
