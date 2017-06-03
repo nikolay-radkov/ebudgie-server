@@ -13,11 +13,15 @@ export default (bot) => {
         attachment: {
           type: 'template',
           payload: {
-            template_type: 'button',
-            text: 'EBudgie needs to log you',
-            buttons: [{
-              type: 'account_link',
-              url: process.env.LOGIN_URL
+            template_type: 'generic',
+            elements: [{
+              title: 'EBudgie needs to log you',
+              image_url: 'https://petersfancybrownhats.com/company_image.png',
+              subtitle: 'To see what is going on with your account you need to login first.',
+              buttons: [{
+                type: 'account_link',
+                url: process.env.LOGIN_URL
+              }]
             }]
           }
         }
