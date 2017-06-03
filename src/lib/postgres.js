@@ -36,4 +36,11 @@ export const updateUser = async (link_code, page_scoped_id) => {
     .returning('*');
 };
 
+export const unlinkUser = async (page_scoped_id) => {
+  return await db('users')
+    .where({ page_scoped_id })
+    .update({ page_scoped_id: null })
+    .returning('*');
+};
+
 export default db;
