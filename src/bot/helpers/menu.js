@@ -12,7 +12,7 @@ export const showMenu = async (reply) => {
             subtitle: 'See how much money you\'ve spent until now',
             buttons: [{
               type: 'postback',
-              title: 'Show',
+              title: 'Open',
               payload: 'SHOW_EXPENSES_MENU',
             }]
           }, {
@@ -21,7 +21,7 @@ export const showMenu = async (reply) => {
             subtitle: 'See the positive income for your budget',
             buttons: [{
               type: 'postback',
-              title: 'Show',
+              title: 'Open',
               payload: 'SHOW_INCOMES_MENU',
             }]
           }, {
@@ -30,7 +30,7 @@ export const showMenu = async (reply) => {
             subtitle: 'See what is going on with your prediction',
             buttons: [{
               type: 'postback',
-              title: 'Show',
+              title: 'Open',
               payload: 'SHOW_THRESHOLD_MENU',
             }]
           }, {
@@ -41,6 +41,13 @@ export const showMenu = async (reply) => {
               type: 'postback',
               title: 'Show',
               payload: 'SHOW_SALARY'
+            }]
+          }, {
+            title: 'Account logout',
+            image_url: `${process.env.API_URL}/public/login.png`,
+            subtitle: 'Logout from EBudgie\'s account',
+            buttons: [{
+              type: 'account_unlink'
             }]
           }]
         }
