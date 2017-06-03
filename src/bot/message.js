@@ -1,5 +1,6 @@
 import { isAuthorized, showLoginMenu } from './helpers/auth';
 import { showSalary } from './helpers/salary';
+import { showMenu } from './helpers/menu';
 
 export default (bot) => {
   return async (data, reply) => {
@@ -14,6 +15,10 @@ export default (bot) => {
       }
       else {
         switch (text.toLowerCase()) {
+          case 'menu':
+          case 'menus':
+            await showMenu(reply);
+            break;
           case 'expense':
           case 'expenses':
 
@@ -29,6 +34,12 @@ export default (bot) => {
           case 'salary':
           case 'salaries':
             await showSalary(page_scoped_id, reply);
+            break;
+          case 'logout':
+          case 'log out':
+          case 'sign out':
+          case 'signout':
+
             break;
           default:
             reply({
