@@ -1,3 +1,5 @@
+import { get } from 'lodash';
+
 import { getUserByPageScopedId } from '../../lib/postgres';
 import { getDocument } from '../../lib/couchdb';
 
@@ -12,9 +14,9 @@ export const showSalary = async (page_scoped_id, reply) => {
 
   try {
     const ebudgie = await getDocument(user.ebudgie_id);
-    const salary = ebudgie.salaries[ebudgie.salaries.length - 1];
+    const salary = get(ebudgie.salaries[ebudgie.salaries.length - 1], 'value', 0);
     await reply({
-      text: `Your current salary is: ${salary}`
+      text: `Your current salary is: ${salary.value}`
     });
   } catch (e) {
     console.log('Error during showing salary', e);
