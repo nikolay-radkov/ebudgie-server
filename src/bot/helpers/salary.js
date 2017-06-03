@@ -16,7 +16,7 @@ export const showSalary = async (page_scoped_id, reply) => {
     const ebudgie = await getDocument(user.ebudgie_id);
     const salary = get(ebudgie.salaries[ebudgie.salaries.length - 1], 'value', 0);
     await reply({
-      text: `Your current salary is: ${salary.value}`
+      text: `Your current salary is: ${salary}`
     });
   } catch (e) {
     console.log('Error during showing salary', e);
