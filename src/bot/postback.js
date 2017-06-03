@@ -1,5 +1,6 @@
 import { isAuthorized, showLoginMenu } from './helpers/auth';
 import { showSalary } from './helpers/salary';
+import { showExpensesMenu, showIncomesMenu, showThresholdsMenu } from './helpers/menu';
 
 export default (bot) => {
   return async (data, reply) => {
@@ -15,13 +16,13 @@ export default (bot) => {
       else {
         switch (payload) {
           case 'SHOW_EXPENSES_MENU':
-
+            await showExpensesMenu(reply);
             break;
           case 'SHOW_INCOMES_MENU':
-
+            await showIncomesMenu(reply);
             break;
           case 'SHOW_THRESHOLD_MENU':
-
+            await showThresholdsMenu(reply);
             break;
           case 'SHOW_SALARY':
             await showSalary(page_scoped_id, reply);
