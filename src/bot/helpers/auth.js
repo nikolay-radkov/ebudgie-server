@@ -15,6 +15,7 @@ export const showLoginMenu = async (reply) => {
         elements: [{
           title: 'EBudgie needs to log you',
           image_url: `${process.env.API_URL}/public/login.png`,
+          image_aspect_ratio: 'square',
           subtitle: 'To see what is going on with your account you need to login first.',
           buttons: [{
             type: 'account_link',
@@ -24,4 +25,4 @@ export const showLoginMenu = async (reply) => {
       }
     }
   });
-}
+};
