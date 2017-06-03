@@ -19,6 +19,13 @@ export const getUserByCredentials = async ({ link_code, email = null, phone = nu
     .first();
 };
 
+export const getUserByPageScopedId = async (page_scoped_id) => {
+  return await db('users')
+    .select()
+    .where({ page_scoped_id })
+    .first();
+};
+
 export const insertUser = async (userData) => {
   return await db('users')
     .insert({
