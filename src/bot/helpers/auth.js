@@ -26,3 +26,23 @@ export const showLoginMenu = async (reply) => {
     }
   });
 };
+
+export const showLogoutMenu = async (reply) => {
+  await reply({
+    attachment: {
+      type: 'template',
+      payload: {
+        template_type: 'generic',
+        image_aspect_ratio: 'square',
+        elements: [{
+          title: 'Account logout',
+          image_url: `${process.env.API_URL}/public/login.png`,
+          subtitle: 'Logout from EBudgie\'s account',
+          buttons: [{
+            type: 'account_unlink'
+          }]
+        }]
+      }
+    }
+  });
+};
