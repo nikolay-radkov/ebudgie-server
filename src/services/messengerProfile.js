@@ -15,17 +15,21 @@ export const setPersistentMenu = async (bot) => {
       call_to_actions: [{
         title: 'Expenses',
         type: 'postback',
-        payload: 'SHOW_EXPENSES'
+        payload: 'SHOW_EXPENSES_MENU'
       },
       {
         title: 'Incomes',
         type: 'postback',
-        payload: 'SHOW_INCOMES'
+        payload: 'SHOW_INCOMES_MENU'
       },
       {
         title: 'Threshold',
         type: 'postback',
-        payload: 'SHOW_THRESHOLD'
+        payload: 'SHOW_THRESHOLD_MENU'
+      }, {
+        title: 'Salary',
+        type: 'postback',
+        payload: 'SHOW_SALARY'
       }]
     }, {
       type: 'web_url',
