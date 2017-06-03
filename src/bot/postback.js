@@ -1,32 +1,36 @@
-// import { getDocument } from '../lib/couchdb';
-// getDocument('3cfc9a96341c0e24')
-//   .then(d => console.log(d))
-//   .catch(d => console.log(d))
+import { isAuthorized, showLoginMenu } from './helpers/auth';
+import { showSalary } from './helpers/salary';
 
 export default (bot) => {
-  return async (payload, reply) => {
-    let text = payload.postback.payload;
+  return async (data, reply) => {
+    const page_scoped_id = data.sender.id;
+    const payload = data.postback.payload;
 
     try {
-      const profile = await bot.getProfile(payload.sender.id);
-      await reply({
-        attachment: {
-          type: 'template',
-          payload: {
-            template_type: 'generic',
-            elements: [{
-              title: 'EBudgie needs to log you',
-              image_url: `${process.env.API_URL}/public/login.png`,
-              subtitle: 'To see what is going on with your account you need to login first.',
-              buttons: [{
-                type: 'account_link',
-                url: `${process.env.API_URL}/login`
-              }]
-            }]
-          }
+      const isLogged = await isAuthorized(page_scoped_id);
+
+      if (!isLogged) {
+        await showLoginMenu(reply);
+      }
+      else {
+        switch (payload) {
+          case 'SHOW_EXPENSES_MENU':
+
+            break;
+          case 'SHOW_INCOMES_MENU':
+
+            break;
+          case 'SHOW_THRESHOLD_MENU':
+
+            break;
+          case 'SHOW_SALARY':
+            await showSalary(page_scoped_id, reply);
+            break;
         }
-      });
-      console.log(`Postback to ${profile.first_name} ${profile.last_name}: ${text}`);
+      }
+
+      const profile = await bot.getProfile(data.sender.id);
+      console.log(`Postback to ${profile.first_name} ${profile.last_name}: ${payload}`);
     } catch (e) {
       console.log('ERROR in bot.on(\'postback\')', e);
     }
