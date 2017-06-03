@@ -2,13 +2,9 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
 
-import initializeMessangerProfile from './services/messengerProfile';
 import bot from './bot';
-
 import apiRoutes from './api';
 import viewsRoutes from './views';
-
-initializeMessangerProfile(bot);
 
 let app = express();
 app.set('port', process.env.PORT || 8080);

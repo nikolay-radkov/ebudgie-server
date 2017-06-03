@@ -1,5 +1,5 @@
 import Bot from '../lib/Bot';
-
+import initializeMessangerProfile from './messengerProfile';
 import message from './message';
 import postback from './postback';
 import accountLinked from './accountLinked';
@@ -10,6 +10,8 @@ const bot = new Bot({
   verify: process.env.VERIFY_TOKEN,
   app_secret: process.env.APP_SECRET
 });
+
+initializeMessangerProfile(bot);
 
 bot.on('error', (err) => {
   console.log(err.message);
