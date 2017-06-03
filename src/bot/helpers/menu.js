@@ -60,3 +60,155 @@ export const showMenu = async (reply) => {
     });
   }
 };
+
+export const showExpensesMenu = async (reply) => {
+  try {
+    await reply({
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'generic',
+          image_aspect_ratio: 'square',
+          elements: [{
+            title: 'Monthly expenses count',
+            image_url: `${process.env.API_URL}/public/login.png`,
+            subtitle: 'See total expenses for the current month',
+            buttons: [{
+              type: 'postback',
+              title: 'Show',
+              payload: 'COUNT_MONTHLY_EXPENSES',
+            }]
+          }, {
+            title: 'All expenses count',
+            image_url: `${process.env.API_URL}/public/login.png`,
+            subtitle: 'See total expenses for all time',
+            buttons: [{
+              type: 'postback',
+              title: 'Show',
+              payload: 'COUNT_ALL_EXPENSES',
+            }]
+          }, {
+            title: 'Monthly expenses',
+            image_url: `${process.env.API_URL}/public/login.png`,
+            subtitle: 'See each expense for the month',
+            buttons: [{
+              type: 'postback',
+              title: 'Show',
+              payload: 'SHOW_MONTHLY_EXPENSES',
+            }]
+          }, {
+            title: 'All expenses',
+            image_url: `${process.env.API_URL}/public/login.png`,
+            subtitle: 'See each expense for all time',
+            buttons: [{
+              type: 'postback',
+              title: 'Show',
+              payload: 'SHOW_ALL_EXPENSES',
+            }]
+          }]
+        }
+      }
+    });
+  } catch (e) {
+    console.log('Error during showing expenses menu', e);
+    await reply({
+      text: 'Something went wrong. Please try again.'
+    });
+  }
+};
+
+export const showIncomesMenu = async (reply) => {
+  try {
+    await reply({
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'generic',
+          image_aspect_ratio: 'square',
+          elements: [{
+            title: 'Monthly incomes count',
+            image_url: `${process.env.API_URL}/public/login.png`,
+            subtitle: 'See total incomes for the current month',
+            buttons: [{
+              type: 'postback',
+              title: 'Show',
+              payload: 'COUNT_MONTHLY_INCOMES',
+            }]
+          }, {
+            title: 'All incomes count',
+            image_url: `${process.env.API_URL}/public/login.png`,
+            subtitle: 'See total incomes for all time',
+            buttons: [{
+              type: 'postback',
+              title: 'Show',
+              payload: 'COUNT_ALL_INCOMES',
+            }]
+          }, {
+            title: 'Monthly incomes',
+            image_url: `${process.env.API_URL}/public/login.png`,
+            subtitle: 'See each incomes for the month',
+            buttons: [{
+              type: 'postback',
+              title: 'Show',
+              payload: 'SHOW_MONTHLY_INCOMES',
+            }]
+          }, {
+            title: 'All incomes',
+            image_url: `${process.env.API_URL}/public/login.png`,
+            subtitle: 'See each incomes for all time',
+            buttons: [{
+              type: 'postback',
+              title: 'Show',
+              payload: 'SHOW_ALL_INCOMES',
+            }]
+          }]
+        }
+      }
+    });
+  } catch (e) {
+    console.log('Error during showing incomes menu', e);
+    await reply({
+      text: 'Something went wrong. Please try again.'
+    });
+  }
+};
+
+export const showThresholdsMenu = async (reply) => {
+  try {
+    await reply({
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'generic',
+          image_aspect_ratio: 'square',
+          elements: [{
+            title: 'Global threshold',
+            image_url: `${process.env.API_URL}/public/login.png`,
+            subtitle: 'See total threshold results',
+            buttons: [{
+              type: 'postback',
+              title: 'Show',
+              payload: 'SHOW_GLOBAL_THRESHOLD',
+            }]
+          }, {
+            title: 'Categories threshold',
+            image_url: `${process.env.API_URL}/public/login.png`,
+            subtitle: 'See total incomes for all time',
+            buttons: [{
+              type: 'postback',
+              title: 'Show',
+              payload: 'SHOW_CATEGORIES_THRESHOLD',
+            }]
+          }]
+        }
+      }
+    });
+  } catch (e) {
+    console.log('Error during showing threshold menu', e);
+    await reply({
+      text: 'Something went wrong. Please try again.'
+    });
+  }
+};
+
+

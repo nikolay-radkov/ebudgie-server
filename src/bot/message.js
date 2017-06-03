@@ -1,6 +1,6 @@
-import { isAuthorized, showLoginMenu } from './helpers/auth';
+import { isAuthorized, showLoginMenu, showLogoutMenu } from './helpers/auth';
 import { showSalary } from './helpers/salary';
-import { showMenu } from './helpers/menu';
+import { showMenu, showExpensesMenu, showIncomesMenu, showThresholdsMenu } from './helpers/menu';
 
 export default (bot) => {
   return async (data, reply) => {
@@ -21,15 +21,15 @@ export default (bot) => {
             break;
           case 'expense':
           case 'expenses':
-
+            await showExpensesMenu(reply);
             break;
           case 'income':
           case 'incomes':
-
+            await showIncomesMenu(reply);
             break;
           case 'threshold':
           case 'thresholds':
-
+            await showThresholdsMenu(reply);
             break;
           case 'salary':
           case 'salaries':
@@ -39,7 +39,7 @@ export default (bot) => {
           case 'log out':
           case 'sign out':
           case 'signout':
-
+            await showLogoutMenu(reply);
             break;
           default:
             reply({
