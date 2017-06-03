@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import path from 'path';
 
 import initializeMessangerProfile from './services/messengerProfile';
 import bot from './bot';
@@ -16,6 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+app.use('/public', express.static(path.join(__dirname, 'static', 'images')));
 
 viewsRoutes(app);
 apiRoutes(app);
