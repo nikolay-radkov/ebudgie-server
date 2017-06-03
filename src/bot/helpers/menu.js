@@ -5,10 +5,10 @@ export const showMenu = async (reply) => {
         type: 'template',
         payload: {
           template_type: 'generic',
+          image_aspect_ratio: 'square',
           elements: [{
             title: 'Expenses menu',
             image_url: `${process.env.API_URL}/public/login.png`,
-            image_aspect_ratio: 'square',
             subtitle: 'See how much money you\'ve spent until now',
             buttons: [{
               type: 'postback',
@@ -18,7 +18,6 @@ export const showMenu = async (reply) => {
           }, {
             title: 'Incomes menu',
             image_url: `${process.env.API_URL}/public/login.png`,
-            image_aspect_ratio: 'square',
             subtitle: 'See the positive income for your budget',
             buttons: [{
               type: 'postback',
@@ -28,7 +27,6 @@ export const showMenu = async (reply) => {
           }, {
             title: 'Threshold menu',
             image_url: `${process.env.API_URL}/public/login.png`,
-            image_aspect_ratio: 'square',
             subtitle: 'See what is going on with your prediction',
             buttons: [{
               type: 'postback',
@@ -38,7 +36,6 @@ export const showMenu = async (reply) => {
           }, {
             title: 'Salary',
             image_url: `${process.env.API_URL}/public/login.png`,
-            image_aspect_ratio: 'square',
             subtitle: 'See you current salary',
             buttons: [{
               type: 'postback',
