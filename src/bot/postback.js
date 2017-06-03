@@ -1,4 +1,4 @@
-// import { getDocument } from './lib/couchdb';
+// import { getDocument } from '../lib/couchdb';
 // getDocument('3cfc9a96341c0e24')
 //   .then(d => console.log(d))
 //   .catch(d => console.log(d))
@@ -16,11 +16,11 @@ export default (bot) => {
             template_type: 'generic',
             elements: [{
               title: 'EBudgie needs to log you',
-              image_url: 'https://petersfancybrownhats.com/company_image.png',
+              image_url: `${process.env.API_URL}/public/login.png`,
               subtitle: 'To see what is going on with your account you need to login first.',
               buttons: [{
                 type: 'account_link',
-                url: process.env.LOGIN_URL
+                url: `${process.env.API_URL}/login`
               }]
             }]
           }
