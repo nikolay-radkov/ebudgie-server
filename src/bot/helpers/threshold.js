@@ -35,7 +35,7 @@ export const showGlobalThreshold = async (page_scoped_id, reply) => {
       text: `Limit: ${threshold}${currency}`
     });
     await reply({
-      text: `Expenses: ${expenses}${currency}`
+      text: `Expenses: ${amount}${currency}`
     });
   } catch (e) {
     console.log('Error during showing global threshold', e);
