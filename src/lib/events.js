@@ -60,3 +60,33 @@ export const getAllEvents = (events, categories, items) => {
     };
   });
 };
+
+export const mapArrayOfIdsToCategories = (categories, ids) => {
+  return map(ids, id => {
+    return {
+      ...id,
+      ...mapIdToCategory(categories, id.categoryId)
+    };
+  });
+};
+
+export const isInCurrentMonth = (date) => {
+  const eventDate = moment(date);
+  const currentDate = moment();
+  return eventDate.month() === currentDate.month() &&
+    eventDate.year() === currentDate.year();
+};
+
+export const getThresholdCategories = (allCategories, categoryIds, expenses, incomes) => {
+  const mappedCategories = mapArrayOfIdsToCategories(allCategories, categoryIds);
+
+  const thresholdCategories = map(mappedCategories, (c) => {
+    return {
+      ...c,
+      expenses: filter(expenses, (e) => e.categoryId === c.id && isInCurrentMonth(e.date)) || [],
+      incomes: filter(incomes, (i) => i.categoryId === c.id && isInCurrentMonth(i.date)) || [],
+    };
+  });
+
+  return thresholdCategories;
+};
