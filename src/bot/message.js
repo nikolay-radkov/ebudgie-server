@@ -41,6 +41,9 @@ export default (bot) => {
           case 'signout':
             await showLogoutMenu(reply);
             break;
+          case 'help':
+
+            break;
           default:
             reply({
               text: 'Sorry I could not understand that. Please try with different words.'
