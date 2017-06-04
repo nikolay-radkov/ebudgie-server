@@ -139,6 +139,7 @@ export default (bot) => {
           case 'website':
           case 'web site':
             await showWebsite(reply);
+            break;
           default:
             reply({
               text: 'Sorry I could not understand that. Please try with different words.'
