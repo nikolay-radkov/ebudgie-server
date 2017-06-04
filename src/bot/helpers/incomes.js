@@ -3,7 +3,7 @@ import { get } from 'lodash';
 import { calculateCurrentEvents } from '../../lib/events';
 import { getEbudgie } from './ebudgie';
 
-export const showMontlyIncomesAmount = async (page_scoped_id, reply) => {
+export const showMonthlyIncomesAmount = async (page_scoped_id, reply) => {
   try {
     const ebudgie = await getEbudgie(page_scoped_id, reply);
 
