@@ -22,6 +22,8 @@ import {
   showCategoriesThreshold,
   showGlobalThreshold
 } from './helpers/threshold';
+import { showHelp } from './helpers/help';
+import { showWelcome } from './helpers/welcome';
 
 export default (bot) => {
   return async (data, reply) => {
@@ -36,6 +38,11 @@ export default (bot) => {
       }
       else {
         switch (text.toLowerCase()) {
+          case 'hi':
+          case 'hello':
+          case 'welcome':
+            await showWelcome(bot, page_scoped_id, reply);
+            break;
           case 'menu':
           case 'menus':
             await showMenu(reply);
@@ -77,10 +84,13 @@ export default (bot) => {
             await showAllExpensesAmount(page_scoped_id, reply);
             break;
           case 'monthly expenses':
+          case 'monthly expense':
           case 'currently expenses':
+          case 'currently expense':
             await showMonthlyExpenses(page_scoped_id, reply);
             break;
           case 'all expenses':
+          case 'all expense':
             await showAllExpenses(page_scoped_id, reply);
             break;
           case 'monthly incomes amount':
@@ -96,10 +106,13 @@ export default (bot) => {
             await showAllIncomesAmount(page_scoped_id, reply);
             break;
           case 'monthly incomes':
+          case 'monthly income':
           case 'currently incomes':
+          case 'currently income':
             await showMonthlyIncomes(page_scoped_id, reply);
             break;
           case 'all incomes':
+          case 'all income':
             await showAllIncomes(page_scoped_id, reply);
             break;
           case 'global threshold':
@@ -119,7 +132,7 @@ export default (bot) => {
             await showCategoriesThreshold(page_scoped_id, reply);
             break;
           case 'help':
-
+            await showHelp(reply);
             break;
           default:
             reply({
