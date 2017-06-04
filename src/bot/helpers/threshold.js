@@ -29,13 +29,13 @@ export const showGlobalThreshold = async (page_scoped_id, reply) => {
     });
 
     await reply({
-      text: `Your current total threshold is at ${globalThresholdPercentage}%`
+      text: `Your current total threshold is at ${globalThresholdPercentage.toFixed(2)}%`
     });
     await reply({
-      text: `Limit: ${threshold}${currency}`
+      text: `Limit: ${threshold.toFixed(2)}${currency}`
     });
     await reply({
-      text: `Expenses: ${amount}${currency}`
+      text: `Expenses: ${amount.toFixed(2)}${currency}`
     });
   } catch (e) {
     console.log('Error during showing global threshold', e);
@@ -76,7 +76,7 @@ export const showCategoriesThreshold = async (page_scoped_id, reply) => {
       let categoryThresholdPercentage = (Math.abs(categoryExpense) / category.value) * 100;
 
       await reply({
-        text: `${category.title} threshold is at ${categoryThresholdPercentage}%\nLimit: ${category.value}${currency}\nExpenses: ${categoryExpense}${currency}`
+        text: `${category.title} threshold is at ${categoryThresholdPercentage.toFixed(2)}%\nLimit: ${category.value.toFixed(2)}${currency}\nExpenses: ${categoryExpense.toFixed(2)}${currency}`
       });
     }
   } catch (e) {

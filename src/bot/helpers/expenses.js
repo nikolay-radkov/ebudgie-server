@@ -21,7 +21,7 @@ export const showMonthlyExpensesAmount = async (page_scoped_id, reply) => {
     const amount = calculateCurrentEvents(expenses);
 
     await reply({
-      text: `Your current monthly expenses are: ${amount}${currency}`
+      text: `Your current monthly expenses are: ${amount.toFixed(2)}${currency}`
     });
   } catch (e) {
     console.log('Error during showing monthly expenses amount', e);
@@ -44,7 +44,7 @@ export const showAllExpensesAmount = async (page_scoped_id, reply) => {
     const amount = calculateEvents(expenses);
 
     await reply({
-      text: `Your all time expenses are: ${amount}${currency}`
+      text: `Your all time expenses are: ${amount.toFixed(2)}${currency}`
     });
   } catch (e) {
     console.log('Error during showing all expenses amount', e);
@@ -78,7 +78,7 @@ export const showMonthlyExpenses = async (page_scoped_id, reply) => {
         let category = get(current, 'category.title', 'Unkown');
         let item = get(current, 'item.name', 'Unkown');
         await reply({
-          text: `Category: ${category}\nItem: ${item}\nValue: ${current.value}${currency}`
+          text: `Category: ${category}\nItem: ${item}\nValue: ${current.value.toFixed(2)}${currency}`
         });
       }
     }
@@ -120,7 +120,7 @@ export const showAllExpenses = async (page_scoped_id, reply) => {
         let category = get(current, 'category.title', 'Unkown');
         let item = get(current, 'item.name', 'Unkown');
         await reply({
-          text: `Category: ${category}\nItem: ${item}\nValue: ${current.value}${currency}`
+          text: `Category: ${category}\nItem: ${item}\nValue: ${current.value.toFixed(2)}${currency}`
         });
       }
     }

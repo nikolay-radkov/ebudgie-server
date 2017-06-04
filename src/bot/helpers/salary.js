@@ -13,7 +13,7 @@ export const showSalary = async (page_scoped_id, reply) => {
     const salary = get(ebudgie.salaries[ebudgie.salaries.length - 1], 'value', 0);
     const currency = get(ebudgie, 'currency', '$');
     await reply({
-      text: `Your current salary is: ${salary}${currency}`
+      text: `Your current salary is: ${salary.toFixed(2)}${currency}`
     });
   } catch (e) {
     console.log('Error during showing salary', e);
