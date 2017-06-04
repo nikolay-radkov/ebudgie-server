@@ -70,22 +70,22 @@ export const showExpensesMenu = async (reply) => {
           template_type: 'generic',
           image_aspect_ratio: 'square',
           elements: [{
-            title: 'Monthly expenses count',
+            title: 'Monthly expenses amount',
             image_url: `${process.env.API_URL}/public/login.png`,
             subtitle: 'See total expenses for the current month',
             buttons: [{
               type: 'postback',
               title: 'Show',
-              payload: 'COUNT_MONTHLY_EXPENSES',
+              payload: 'SHOW_MONTHLY_EXPENSES_AMOUNT',
             }]
           }, {
-            title: 'All expenses count',
+            title: 'All expenses amount',
             image_url: `${process.env.API_URL}/public/login.png`,
             subtitle: 'See total expenses for all time',
             buttons: [{
               type: 'postback',
               title: 'Show',
-              payload: 'COUNT_ALL_EXPENSES',
+              payload: 'SHOW_ALL_EXPENSES_AMOUNT',
             }]
           }, {
             title: 'Monthly expenses',
@@ -126,22 +126,22 @@ export const showIncomesMenu = async (reply) => {
           template_type: 'generic',
           image_aspect_ratio: 'square',
           elements: [{
-            title: 'Monthly incomes count',
+            title: 'Monthly incomes amount',
             image_url: `${process.env.API_URL}/public/login.png`,
             subtitle: 'See total incomes for the current month',
             buttons: [{
               type: 'postback',
               title: 'Show',
-              payload: 'COUNT_MONTHLY_INCOMES',
+              payload: 'SHOW_MONTHLY_INCOMES_AMOUNT',
             }]
           }, {
-            title: 'All incomes count',
+            title: 'All incomes amount',
             image_url: `${process.env.API_URL}/public/login.png`,
             subtitle: 'See total incomes for all time',
             buttons: [{
               type: 'postback',
               title: 'Show',
-              payload: 'COUNT_ALL_INCOMES',
+              payload: 'SHOW_ALL_INCOMES_AMOUNT',
             }]
           }, {
             title: 'Monthly incomes',
