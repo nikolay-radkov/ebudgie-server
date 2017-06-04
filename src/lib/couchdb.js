@@ -1,5 +1,4 @@
 import CouchDb from 'node-couchdb';
-import _ from 'lodash';
 
 const db = new CouchDb({
   host: process.env.COUCHDB_HOST,

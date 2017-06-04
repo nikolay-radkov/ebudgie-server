@@ -1,4 +1,4 @@
-import { get, sumBy, sortBy } from 'lodash';
+import { get, sumBy } from 'lodash';
 
 import getSlogan from '../../lib/slogan';
 
