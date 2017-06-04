@@ -46,7 +46,7 @@ export const setPersistentMenu = async (bot) => {
 export const setGetStartedButton = async (bot) => {
   try {
     const data = await bot.setGetStartedButton([{
-      payload: 'New user connected'
+      payload: 'SHOW_WELCOME'
     }]);
     console.log(`Setting GetStartedButton result ${JSON.stringify(data)}`);
   } catch (e) {

@@ -17,6 +17,9 @@ import {
   showCategoriesThreshold,
   showGlobalThreshold
 } from './helpers/threshold';
+import {
+  showWelcome
+} from './helpers/welcome';
 
 export default (bot) => {
   return async (data, reply) => {
@@ -72,6 +75,9 @@ export default (bot) => {
             break;
           case 'SHOW_CATEGORIES_THRESHOLD':
             await showCategoriesThreshold(page_scoped_id, reply);
+            break;
+          case 'SHOW_WELCOME':
+            await showWelcome(bot, page_scoped_id, reply);
             break;
         }
       }
