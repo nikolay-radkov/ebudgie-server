@@ -34,7 +34,7 @@ export const setPersistentMenu = async (bot) => {
     }, {
       type: 'web_url',
       title: 'Visit Website',
-      url: 'https://leon92xx.wixsite.com/ebudgie-website/',
+      url: 'https://ebudgie.herokuapp.com/',
       webview_height_ratio: 'full'
     }]);
     console.log(`Setting setPersistentMenu result ${JSON.stringify(data)}`);

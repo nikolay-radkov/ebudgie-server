@@ -8,7 +8,7 @@ export const showWebsite = async (reply) => {
           text: 'Ebudgies\'s website',
           buttons: [{
             type: 'web_url',
-            url: 'https://leon92xx.wixsite.com/ebudgie-website/',
+            url: 'https://ebudgie.herokuapp.com/',
             title: 'Open'
           }]
         }
