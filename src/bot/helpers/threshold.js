@@ -17,6 +17,14 @@ export const showGlobalThreshold = async (page_scoped_id, reply) => {
     }
 
     const threshold = get(ebudgie.thresholds[ebudgie.thresholds.length - 1], 'value', 0);
+
+    if (!threshold) {
+      await reply({
+        text: 'You don\'t have a registered threshold right now'
+      });
+      return;
+    }
+
     const expenses = get(ebudgie, 'expenses', []);
     const currency = get(ebudgie, 'currency', '$');
     const amount = calculateCurrentEvents(expenses);
