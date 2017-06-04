@@ -71,12 +71,12 @@ export const showCategoriesThreshold = async (page_scoped_id, reply) => {
     });
 
     for (let i = 0; i < thresholdCategories.length; i++) {
-      let category = thresholdCategories.title;
+      let category = thresholdCategories[i];
       let categoryExpense = sumBy(category.expenses, 'value');
       let categoryThresholdPercentage = (Math.abs(categoryExpense) / category.value) * 100;
 
       await reply({
-        text: `${category} threshold is at ${categoryThresholdPercentage}%\nLimit: ${category.value}${currency}\nExpenses: ${categoryExpense}${currency}`
+        text: `${category.title} threshold is at ${categoryThresholdPercentage}%\nLimit: ${category.value}${currency}\nExpenses: ${categoryExpense}${currency}`
       });
     }
   } catch (e) {
