@@ -1,6 +1,27 @@
 import { isAuthorized, showLoginMenu, showLogoutMenu } from './helpers/auth';
 import { showSalary } from './helpers/salary';
-import { showMenu, showExpensesMenu, showIncomesMenu, showThresholdsMenu } from './helpers/menu';
+import {
+  showMenu,
+  showExpensesMenu,
+  showIncomesMenu,
+  showThresholdsMenu
+} from './helpers/menu';
+import {
+  showMonthlyExpensesAmount,
+  showAllExpensesAmount,
+  showMonthlyExpenses,
+  showAllExpenses
+} from './helpers/expenses';
+import {
+  showMonthlyIncomesAmount,
+  showAllIncomesAmount,
+  showMonthlyIncomes,
+  showAllIncomes
+} from './helpers/incomes';
+import {
+  showCategoriesThreshold,
+  showGlobalThreshold
+} from './helpers/threshold';
 
 export default (bot) => {
   return async (data, reply) => {
@@ -28,7 +49,9 @@ export default (bot) => {
             await showIncomesMenu(reply);
             break;
           case 'threshold':
+          case 'limit':
           case 'thresholds':
+          case 'limits':
             await showThresholdsMenu(reply);
             break;
           case 'salary':
@@ -40,6 +63,60 @@ export default (bot) => {
           case 'sign out':
           case 'signout':
             await showLogoutMenu(reply);
+            break;
+          case 'monthly expenses amount':
+          case 'currently expenses amount':
+          case 'currently expenses count':
+          case 'monthly expenses count':
+            await showMonthlyExpensesAmount(page_scoped_id, reply);
+            break;
+          case 'all expenses amount':
+          case 'expenses amount':
+          case 'all expenses count':
+          case 'expenses count':
+            await showAllExpensesAmount(page_scoped_id, reply);
+            break;
+          case 'monthly expenses':
+          case 'currently expenses':
+            await showMonthlyExpenses(page_scoped_id, reply);
+            break;
+          case 'all expenses':
+            await showAllExpenses(page_scoped_id, reply);
+            break;
+          case 'monthly incomes amount':
+          case 'currently incomes amount':
+          case 'currently incomes count':
+          case 'monthly incomes count':
+            await showMonthlyIncomesAmount(page_scoped_id, reply);
+            break;
+          case 'all incomes amount':
+          case 'incomes amount':
+          case 'all incomes count':
+          case 'incomes count':
+            await showAllIncomesAmount(page_scoped_id, reply);
+            break;
+          case 'monthly incomes':
+          case 'currently incomes':
+            await showMonthlyIncomes(page_scoped_id, reply);
+            break;
+          case 'all incomes':
+            await showAllIncomes(page_scoped_id, reply);
+            break;
+          case 'global threshold':
+          case 'global limit':
+          case 'global thresholds':
+          case 'global limits':
+            await showGlobalThreshold(page_scoped_id, reply);
+            break;
+          case 'category threshold':
+          case 'category limit':
+          case 'category thresholds':
+          case 'category limits':
+          case 'categories threshold':
+          case 'categories limit':
+          case 'categories thresholds':
+          case 'categories limits':
+            await showCategoriesThreshold(page_scoped_id, reply);
             break;
           case 'help':
 
