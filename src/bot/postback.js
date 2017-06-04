@@ -1,6 +1,7 @@
 import { isAuthorized, showLoginMenu } from './helpers/auth';
 import { showSalary } from './helpers/salary';
 import { showExpensesMenu, showIncomesMenu, showThresholdsMenu } from './helpers/menu';
+import { showMonthlyIncomesAmount } from './helpers/incomes';
 
 export default (bot) => {
   return async (data, reply) => {
@@ -26,6 +27,30 @@ export default (bot) => {
             break;
           case 'SHOW_SALARY':
             await showSalary(page_scoped_id, reply);
+            break;
+          case 'SHOW_MONTHLY_EXPENSES_AMOUNT':
+
+            break;
+          case 'SHOW_ALL_EXPENSES_AMOUNT':
+
+            break;
+          case 'SHOW_MONTHLY_EXPENSES':
+
+            break;
+          case 'SHOW_ALL_EXPENSES':
+
+            break;
+          case 'SHOW_MONTHLY_INCOMES_AMOUNT':
+            await showMonthlyIncomesAmount(page_scoped_id, reply);
+            break;
+          case 'SHOW_ALL_INCOMES_AMOUNT':
+
+            break;
+          case 'SHOW_MONTHLY_INCOMES':
+
+            break;
+          case 'SHOW_ALL_INCOMES':
+
             break;
         }
       }
