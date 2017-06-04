@@ -45,9 +45,7 @@ export const setPersistentMenu = async (bot) => {
 
 export const setGetStartedButton = async (bot) => {
   try {
-    const data = await bot.setGetStartedButton([{
-      payload: 'SHOW_WELCOME'
-    }]);
+    const data = await bot.setGetStartedButton('SHOW_WELCOME');
     console.log(`Setting GetStartedButton result ${JSON.stringify(data)}`);
   } catch (e) {
     console.log('Error during setGetStartedButton', e);

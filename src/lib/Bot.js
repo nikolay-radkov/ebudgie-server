@@ -86,10 +86,10 @@ class Bot extends EventEmitter {
     return await this.setThreadSettings(greetingData);
   }
 
-  async setGetStartedButton(callToActionData) {
+  async setGetStartedButton(payload) {
     const getStartedData = {
       get_started: {
-        payload: JSON.stringify(callToActionData)
+        payload,
       }
     };
 
