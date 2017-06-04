@@ -13,6 +13,10 @@ import {
   showMonthlyIncomes,
   showAllIncomes
 } from './helpers/incomes';
+import {
+  showCategoriesThreshold,
+  showGlobalThreshold
+} from './helpers/threshold';
 
 export default (bot) => {
   return async (data, reply) => {
@@ -62,6 +66,12 @@ export default (bot) => {
             break;
           case 'SHOW_ALL_INCOMES':
             await showAllIncomes(page_scoped_id, reply);
+            break;
+          case 'SHOW_GLOBAL_THRESHOLD':
+            await showGlobalThreshold(page_scoped_id, reply);
+            break;
+          case 'SHOW_CATEGORIES_THRESHOLD':
+            await showCategoriesThreshold(page_scoped_id, reply);
             break;
         }
       }
