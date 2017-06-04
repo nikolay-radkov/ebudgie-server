@@ -1,5 +1,5 @@
 import { filter, sumBy } from 'lodash';
-import moment from 'momemnt';
+import moment from 'moment';
 
 export const calculateCurrentEvents = (events) => {
   const filteredEvents = filter(events, (e) => {

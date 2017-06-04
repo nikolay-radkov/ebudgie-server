@@ -17,6 +17,7 @@
     "express": "^4.15.3",
     "knex": "^0.13.0",
     "koa": "^2.2.0",
+    "moment": "^2.18.1",
     "node-couchdb": "nikolay-radkov/node-couchdb",
     "pg": "^6.2.3",
     "request": "^2.81.0",
