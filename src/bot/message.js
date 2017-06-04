@@ -24,6 +24,7 @@ import {
 } from './helpers/threshold';
 import { showHelp } from './helpers/help';
 import { showWelcome } from './helpers/welcome';
+import { showWebsite } from './helpers/website';
 
 export default (bot) => {
   return async (data, reply) => {
@@ -132,8 +133,12 @@ export default (bot) => {
             await showCategoriesThreshold(page_scoped_id, reply);
             break;
           case 'help':
+          case 'ebudgie':
             await showHelp(reply);
             break;
+          case 'website':
+          case 'web site':
+            await showWebsite(reply);
           default:
             reply({
               text: 'Sorry I could not understand that. Please try with different words.'
