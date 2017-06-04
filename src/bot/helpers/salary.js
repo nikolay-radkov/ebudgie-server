@@ -1,19 +1,15 @@
 import { get } from 'lodash';
 
-import { getUserByPageScopedId } from '../../lib/postgres';
-import { getDocument } from '../../lib/couchdb';
+import { getEbudgie } from './ebudgie';
 
 export const showSalary = async (page_scoped_id, reply) => {
-  const user = await getUserByPageScopedId(page_scoped_id);
-
-  if (!user) {
-    return await reply({
-      text: 'Something went wrong. Please try again.'
-    });
-  }
-
   try {
-    const ebudgie = await getDocument(user.ebudgie_id);
+    const ebudgie = await getEbudgie(page_scoped_id, reply);
+
+    if (!ebudgie) {
+      return;
+    }
+
     const salary = get(ebudgie.salaries[ebudgie.salaries.length - 1], 'value', 0);
     const currency = get(ebudgie, 'currency', '$');
     await reply({
