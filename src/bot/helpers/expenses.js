@@ -8,7 +8,7 @@ import {
 } from '../../lib/events';
 import { getEbudgie } from './ebudgie';
 
-export const showMonthlyIncomesAmount = async (page_scoped_id, reply) => {
+export const showMonthlyExpensesAmount = async (page_scoped_id, reply) => {
   try {
     const ebudgie = await getEbudgie(page_scoped_id, reply);
 
@@ -16,22 +16,22 @@ export const showMonthlyIncomesAmount = async (page_scoped_id, reply) => {
       return;
     }
 
-    const incomes = get(ebudgie, 'incomes', []);
+    const expenses = get(ebudgie, 'expenses', []);
     const currency = get(ebudgie, 'currency', '$');
-    const amount = calculateCurrentEvents(incomes);
+    const amount = calculateCurrentEvents(expenses);
 
     await reply({
-      text: `Your current monthly incomes are: ${amount}${currency}`
+      text: `Your current monthly expenses are: ${amount}${currency}`
     });
   } catch (e) {
-    console.log('Error during showing monthly incomes amount', e);
+    console.log('Error during showing monthly expenses amount', e);
     await reply({
       text: 'Something went wrong. Please try again.'
     });
   }
 };
 
-export const showAllIncomesAmount = async (page_scoped_id, reply) => {
+export const showAllExpensesAmount = async (page_scoped_id, reply) => {
   try {
     const ebudgie = await getEbudgie(page_scoped_id, reply);
 
@@ -39,22 +39,22 @@ export const showAllIncomesAmount = async (page_scoped_id, reply) => {
       return;
     }
 
-    const incomes = get(ebudgie, 'incomes', []);
+    const expenses = get(ebudgie, 'expenses', []);
     const currency = get(ebudgie, 'currency', '$');
-    const amount = calculateEvents(incomes);
+    const amount = calculateEvents(expenses);
 
     await reply({
-      text: `Your all time incomes are: ${amount}${currency}`
+      text: `Your all time expenses are: ${amount}${currency}`
     });
   } catch (e) {
-    console.log('Error during showing all incomes amount', e);
+    console.log('Error during showing all expenses amount', e);
     await reply({
       text: 'Something went wrong. Please try again.'
     });
   }
 };
 
-export const showMonthlyIncomes = async (page_scoped_id, reply) => {
+export const showMonthlyExpenses = async (page_scoped_id, reply) => {
   try {
     const ebudgie = await getEbudgie(page_scoped_id, reply);
 
@@ -62,19 +62,19 @@ export const showMonthlyIncomes = async (page_scoped_id, reply) => {
       return;
     }
 
-    const incomes = get(ebudgie, 'incomes', []);
+    const expenses = get(ebudgie, 'expenses', []);
     const categories = get(ebudgie, 'categories', []);
     const items = get(ebudgie, 'items', []);
     const currency = get(ebudgie, 'currency', '$');
-    const monthlyIncomes = getMonthlyEvents(incomes, categories, items) || [];
+    const monthlyExpenses = getMonthlyEvents(expenses, categories, items) || [];
 
-    if (monthlyIncomes.length > 0) {
+    if (monthlyExpenses.length > 0) {
       await reply({
-        text: 'Your monthly incomes are:'
+        text: 'Your monthly expenses are:'
       });
 
-      for (let i = 0; i < monthlyIncomes.length; i++) {
-        let current = monthlyIncomes[i];
+      for (let i = 0; i < monthlyExpenses.length; i++) {
+        let current = monthlyExpenses[i];
         let category = get(current, 'category.title', 'Unkown');
         let item = get(current, 'item.name', 'Unkown');
         await reply({
@@ -84,11 +84,11 @@ export const showMonthlyIncomes = async (page_scoped_id, reply) => {
     }
     else {
       await reply({
-        text: 'Your don\'t have any incomes for this month.'
+        text: 'Your don\'t have any expenses for this month.'
       });
     }
   } catch (e) {
-    console.log('Error during showing monthly incomes', e);
+    console.log('Error during showing monthly expenses', e);
     await reply({
       text: 'Something went wrong. Please try again.'
     });
@@ -96,7 +96,7 @@ export const showMonthlyIncomes = async (page_scoped_id, reply) => {
 };
 
 
-export const showAllIncomes = async (page_scoped_id, reply) => {
+export const showAllExpenses = async (page_scoped_id, reply) => {
   try {
     const ebudgie = await getEbudgie(page_scoped_id, reply);
 
@@ -104,19 +104,19 @@ export const showAllIncomes = async (page_scoped_id, reply) => {
       return;
     }
 
-    const incomes = get(ebudgie, 'incomes', []);
+    const expenses = get(ebudgie, 'expenses', []);
     const categories = get(ebudgie, 'categories', []);
     const items = get(ebudgie, 'items', []);
     const currency = get(ebudgie, 'currency', '$');
-    const allIncomes = getAllEvents(incomes, categories, items) || [];
+    const allExpenses = getAllEvents(expenses, categories, items) || [];
 
-    if (allIncomes.length > 0) {
+    if (allExpenses.length > 0) {
       await reply({
-        text: 'Your all time incomes are:'
+        text: 'Your all time expenses are:'
       });
 
-      for (let i = 0; i < allIncomes.length; i++) {
-        let current = allIncomes[i];
+      for (let i = 0; i < allExpenses.length; i++) {
+        let current = allExpenses[i];
         let category = get(current, 'category.title', 'Unkown');
         let item = get(current, 'item.name', 'Unkown');
         await reply({
@@ -126,11 +126,11 @@ export const showAllIncomes = async (page_scoped_id, reply) => {
     }
     else {
       await reply({
-        text: 'Your don\'t have any incomes.'
+        text: 'Your don\'t have any expenses.'
       });
     }
   } catch (e) {
-    console.log('Error during showing all incomes', e);
+    console.log('Error during showing all expenses', e);
     await reply({
       text: 'Something went wrong. Please try again.'
     });

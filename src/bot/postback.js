@@ -2,9 +2,16 @@ import { isAuthorized, showLoginMenu } from './helpers/auth';
 import { showSalary } from './helpers/salary';
 import { showExpensesMenu, showIncomesMenu, showThresholdsMenu } from './helpers/menu';
 import {
+  showMonthlyExpensesAmount,
+  showAllExpensesAmount,
+  showMonthlyExpenses,
+  showAllExpenses
+} from './helpers/expenses';
+import {
   showMonthlyIncomesAmount,
   showAllIncomesAmount,
-  showMonthlyIncomes
+  showMonthlyIncomes,
+  showAllIncomes
 } from './helpers/incomes';
 
 export default (bot) => {
@@ -33,16 +40,16 @@ export default (bot) => {
             await showSalary(page_scoped_id, reply);
             break;
           case 'SHOW_MONTHLY_EXPENSES_AMOUNT':
-
+            await showMonthlyExpensesAmount(page_scoped_id, reply);
             break;
           case 'SHOW_ALL_EXPENSES_AMOUNT':
-
+            await showAllExpensesAmount(page_scoped_id, reply);
             break;
           case 'SHOW_MONTHLY_EXPENSES':
-
+            await showMonthlyExpenses(page_scoped_id, reply);
             break;
           case 'SHOW_ALL_EXPENSES':
-
+            await showAllExpenses(page_scoped_id, reply);
             break;
           case 'SHOW_MONTHLY_INCOMES_AMOUNT':
             await showMonthlyIncomesAmount(page_scoped_id, reply);
@@ -54,7 +61,7 @@ export default (bot) => {
             await showMonthlyIncomes(page_scoped_id, reply);
             break;
           case 'SHOW_ALL_INCOMES':
-
+            await showAllIncomes(page_scoped_id, reply);
             break;
         }
       }
