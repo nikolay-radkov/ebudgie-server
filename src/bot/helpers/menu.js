@@ -8,7 +8,7 @@ export const showMenu = async (reply) => {
           image_aspect_ratio: 'square',
           elements: [{
             title: 'Expenses menu',
-            image_url: `${process.env.API_URL}/public/login.png`,
+            image_url: `${process.env.API_URL}/public/incomes.png`,
             subtitle: 'See how much money you\'ve spent until now',
             buttons: [{
               type: 'postback',
@@ -17,7 +17,7 @@ export const showMenu = async (reply) => {
             }]
           }, {
             title: 'Incomes menu',
-            image_url: `${process.env.API_URL}/public/login.png`,
+            image_url: `${process.env.API_URL}/public/expenses.png`,
             subtitle: 'See the positive income for your budget',
             buttons: [{
               type: 'postback',
@@ -26,7 +26,7 @@ export const showMenu = async (reply) => {
             }]
           }, {
             title: 'Threshold menu',
-            image_url: `${process.env.API_URL}/public/login.png`,
+            image_url: `${process.env.API_URL}/public/threshold.png`,
             subtitle: 'See what is going on with your prediction',
             buttons: [{
               type: 'postback',
@@ -35,7 +35,7 @@ export const showMenu = async (reply) => {
             }]
           }, {
             title: 'Salary',
-            image_url: `${process.env.API_URL}/public/login.png`,
+            image_url: `${process.env.API_URL}/public/salary.png`,
             subtitle: 'See you current salary',
             buttons: [{
               type: 'postback',
@@ -44,7 +44,7 @@ export const showMenu = async (reply) => {
             }]
           }, {
             title: 'Account logout',
-            image_url: `${process.env.API_URL}/public/login.png`,
+            image_url: `${process.env.API_URL}/public/logout.png`,
             subtitle: 'Logout from EBudgie\'s account',
             buttons: [{
               type: 'account_unlink'

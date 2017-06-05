@@ -95,7 +95,6 @@ export const showMonthlyExpenses = async (page_scoped_id, reply) => {
   }
 };
 
-
 export const showAllExpenses = async (page_scoped_id, reply) => {
   try {
     const ebudgie = await getEbudgie(page_scoped_id, reply);
