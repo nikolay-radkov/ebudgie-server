@@ -36,7 +36,7 @@ export const showLogoutMenu = async (reply) => {
         image_aspect_ratio: 'square',
         elements: [{
           title: 'Account logout',
-          image_url: `${process.env.API_URL}/public/login.png`,
+          image_url: `${process.env.API_URL}/public/logout.png`,
           subtitle: 'Logout from EBudgie\'s account',
           buttons: [{
             type: 'account_unlink'
