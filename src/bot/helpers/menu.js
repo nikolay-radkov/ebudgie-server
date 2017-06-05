@@ -8,7 +8,7 @@ export const showMenu = async (reply) => {
           image_aspect_ratio: 'square',
           elements: [{
             title: 'Expenses menu',
-            image_url: `${process.env.API_URL}/public/incomes.png`,
+            image_url: `${process.env.API_URL}/public/expenses.png`,
             subtitle: 'See how much money you\'ve spent until now',
             buttons: [{
               type: 'postback',
@@ -17,7 +17,7 @@ export const showMenu = async (reply) => {
             }]
           }, {
             title: 'Incomes menu',
-            image_url: `${process.env.API_URL}/public/expenses.png`,
+            image_url: `${process.env.API_URL}/public/incomes.png`,
             subtitle: 'See the positive income for your budget',
             buttons: [{
               type: 'postback',
@@ -71,7 +71,7 @@ export const showExpensesMenu = async (reply) => {
           image_aspect_ratio: 'square',
           elements: [{
             title: 'Monthly expenses amount',
-            image_url: `${process.env.API_URL}/public/login.png`,
+            image_url: `${process.env.API_URL}/public/expenses.png`,
             subtitle: 'See total expenses for the current month',
             buttons: [{
               type: 'postback',
@@ -80,7 +80,7 @@ export const showExpensesMenu = async (reply) => {
             }]
           }, {
             title: 'All expenses amount',
-            image_url: `${process.env.API_URL}/public/login.png`,
+            image_url: `${process.env.API_URL}/public/all-expenses.png`,
             subtitle: 'See total expenses for all time',
             buttons: [{
               type: 'postback',
@@ -89,7 +89,7 @@ export const showExpensesMenu = async (reply) => {
             }]
           }, {
             title: 'Monthly expenses',
-            image_url: `${process.env.API_URL}/public/login.png`,
+            image_url: `${process.env.API_URL}/public/monthly-expenses-list.png`,
             subtitle: 'See each expense for the month',
             buttons: [{
               type: 'postback',
@@ -98,7 +98,7 @@ export const showExpensesMenu = async (reply) => {
             }]
           }, {
             title: 'All expenses',
-            image_url: `${process.env.API_URL}/public/login.png`,
+            image_url: `${process.env.API_URL}/public/all-expenses-list.png`,
             subtitle: 'See each expense for all time',
             buttons: [{
               type: 'postback',
@@ -127,7 +127,7 @@ export const showIncomesMenu = async (reply) => {
           image_aspect_ratio: 'square',
           elements: [{
             title: 'Monthly incomes amount',
-            image_url: `${process.env.API_URL}/public/login.png`,
+            image_url: `${process.env.API_URL}/public/incomes.png`,
             subtitle: 'See total incomes for the current month',
             buttons: [{
               type: 'postback',
@@ -136,7 +136,7 @@ export const showIncomesMenu = async (reply) => {
             }]
           }, {
             title: 'All incomes amount',
-            image_url: `${process.env.API_URL}/public/login.png`,
+            image_url: `${process.env.API_URL}/public/all-incomes.png`,
             subtitle: 'See total incomes for all time',
             buttons: [{
               type: 'postback',
@@ -145,7 +145,7 @@ export const showIncomesMenu = async (reply) => {
             }]
           }, {
             title: 'Monthly incomes',
-            image_url: `${process.env.API_URL}/public/login.png`,
+            image_url: `${process.env.API_URL}/public/monthly-incomes-list.png`,
             subtitle: 'See each incomes for the month',
             buttons: [{
               type: 'postback',
@@ -154,7 +154,7 @@ export const showIncomesMenu = async (reply) => {
             }]
           }, {
             title: 'All incomes',
-            image_url: `${process.env.API_URL}/public/login.png`,
+            image_url: `${process.env.API_URL}/public/all-incomes-list.png`,
             subtitle: 'See each incomes for all time',
             buttons: [{
               type: 'postback',
@@ -183,7 +183,7 @@ export const showThresholdsMenu = async (reply) => {
           image_aspect_ratio: 'square',
           elements: [{
             title: 'Global threshold',
-            image_url: `${process.env.API_URL}/public/login.png`,
+            image_url: `${process.env.API_URL}/public/threshold.png`,
             subtitle: 'See total threshold results',
             buttons: [{
               type: 'postback',
@@ -192,7 +192,7 @@ export const showThresholdsMenu = async (reply) => {
             }]
           }, {
             title: 'Categories threshold',
-            image_url: `${process.env.API_URL}/public/login.png`,
+            image_url: `${process.env.API_URL}/public/threshold-categories.png`,
             subtitle: 'See total incomes for all time',
             buttons: [{
               type: 'postback',
