@@ -25,6 +25,7 @@ import {
 import { showHelp } from './helpers/help';
 import { showWelcome } from './helpers/welcome';
 import { showWebsite } from './helpers/website';
+import { showThankYou } from './helpers/thankYou';
 
 export default (bot) => {
   return async (data, reply) => {
@@ -139,6 +140,12 @@ export default (bot) => {
           case 'website':
           case 'web site':
             await showWebsite(reply);
+            break;
+          case 'thank':
+          case 'thanks':
+          case 'thank you':
+          case 'thanks you':
+            await showThankYou(reply);
             break;
           default:
             reply({
