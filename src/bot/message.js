@@ -145,7 +145,7 @@ export default (bot) => {
           case 'thanks':
           case 'thank you':
           case 'thanks you':
-            await showThankYou(reply);
+            await showThankYou(bot, page_scoped_id, reply);
             break;
           default:
             reply({
